@@ -9,6 +9,10 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/users', userRoutes);
+
+
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
 
