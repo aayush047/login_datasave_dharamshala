@@ -97,4 +97,25 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+// 🔹 DELETE user by UID
+router.delete('/:uid', async (req, res) => {
+  try {
+    const { uid } = req.params;
+
+    const deletedUser = await User.findOneAndDelete({ uid });
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User deleted successfully', user: deletedUser });
+  } catch (error) {
+    console.error('❌ Error deleting user:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
 module.exports = router;
